@@ -282,6 +282,23 @@ namespace UnityGLTF
 			get { return _lastLoadedScene; }
 		}
 
+		public GameObject GetNodeFromCache(int nodeIndex)
+		{
+			if (_assetCache?.NodeCache == null)
+			{
+				Debug.LogError($"Node cache not initialized");
+				return null;
+			}
+
+			if (nodeIndex >= _assetCache.NodeCache.Length)
+			{
+				Debug.LogError($"Node index {nodeIndex} out of bounds. NodeCache.Length = {_assetCache.NodeCache.Length}");
+				return null;
+			}
+
+			return _assetCache.NodeCache[nodeIndex];
+		}
+
 		/// <summary>
 		/// Loads a glTF Scene into the LastLoadedScene field
 		/// </summary>
