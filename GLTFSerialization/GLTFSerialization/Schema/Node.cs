@@ -73,6 +73,21 @@ namespace GLTF.Schema
 		/// </summary>
 		public List<double> Weights;
 
+		/// <summary>
+		/// ScopeAR - Non-standard property for Unity layer
+		/// </summary>
+		public int Layer;
+
+		/// <summary>
+		/// ScopeAR - Non-standard property for Unity tag
+		/// </summary>
+		public string Tag;
+
+		/// <summary>
+		/// ScopeAR - Non-standard property for enabling/disabling object
+		/// </summary>
+		public bool Active;
+
 		public Node()
 		{
 		}
@@ -170,6 +185,15 @@ namespace GLTF.Schema
 						break;
 					case "weights":
 						node.Weights = reader.ReadDoubleList();
+						break;
+					case "layer":
+						node.Layer = reader.ReadAsInt32() ?? 0;
+						break;
+					case "tag":
+						node.Tag = reader.ReadAsString();
+						break;
+					case "active":
+						node.Active = reader.ReadAsBoolean() ?? true;
 						break;
 					default:
 						node.DefaultPropertyDeserializer(root, reader);
